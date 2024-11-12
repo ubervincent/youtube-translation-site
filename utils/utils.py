@@ -48,7 +48,12 @@ def read_content_from_file(file_path: str) -> str:
         return f.read()
     
 def get_video_id_from_url(url: str) -> str:
-    return url.split('watch?v=')[1].split('&')[0]
+    import re
+    match = re.search(r'[a-zA-Z0-9]{10,14}', url)
+    if match:
+        return match.group(0)
+    else:
+        raise ValueError("Video ID not found in URL")
 
 def get_embed_url_from_video_id(video_id: str) -> str:
     return f"https://www.youtube.com/embed/{video_id}"

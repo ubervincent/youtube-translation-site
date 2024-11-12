@@ -28,6 +28,8 @@ body {
     width: 100%;
     font-size: 2rem;
     margin: 2rem 0; 
+    height: 58vh;
+    overflow: auto;
 }
 
 p {

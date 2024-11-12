@@ -6,7 +6,7 @@ authors = ["Vincent Lam <vincent@formfluid.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = "^3.11"
 pytube = "^15.0.0"
 yt-dlp = "^2024.11.4"
 youtube-transcript-api = "^0.6.2"

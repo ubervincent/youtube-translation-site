@@ -20,7 +20,7 @@ def get_transcript_by_url(url: str) -> str:
     #     return payload
     
     # else:
-    transcript = YouTubeTranscriptApi.get_transcript(video_id, proxies={"https": f"https://oiholelg-rotate:h3zcpwb3wbr7@p.webshare.io:80/"})
+    transcript = YouTubeTranscriptApi.get_transcript(video_id, proxies={"http": f"http://oiholelg-rotate:h3zcpwb3wbr7@p.webshare.io:80/"})
 
     write_content_to_file(
         output_path='./transcripts',

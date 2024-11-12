@@ -2,15 +2,12 @@
 <html>
   <head>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
-    <title>AI翻譯俊銘小樹林</title>
+    <title>YouTube Translator</title>
   </head>
   <body>
     <div class="container">
-      <h1 class="title">AI翻譯俊銘小樹洞</h1>
-      <form action="/translate" method="get">
-        <input type="text" name="video-url" placeholder="Enter YouTube video URL" />
-        <button type="submit">Translate</button>
-      </form>
+      <h1 class="title">YouTube Translator</h1>
+      <h2 class="subtitle">By Vincent Lam</h2>
       {% if video_id %}
       <div id="video-container" class="video-container">
         <iframe

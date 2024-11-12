@@ -45,7 +45,11 @@ def write_content_to_file(
 
 def read_content_from_file(file_path: str) -> str:
     with open(file_path, 'r', encoding='utf-8') as f:
-        return f.read()
+        content = f.read()
+        if file_path.endswith('.json'):
+            return json.loads(content)
+        else:
+            return content
     
 def get_video_id_from_url(url: str) -> str:
     import re

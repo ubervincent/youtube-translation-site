@@ -15,22 +15,20 @@ def get_transcript_by_url(url: str) -> str:
         'video_id': video_id
     }
     
-    if check_if_video_has_been_translated(video_id):
-        payload['transcript'] = return_translation_data(video_id)
-        return payload
+    # if check_if_video_has_been_translated(video_id):
+    #     payload['transcript'] = return_translation_data(video_id)
+    #     return payload
     
-    else:
-        transcript = YouTubeTranscriptApi.get_transcript(video_id, proxies=[
-            {"http": f"http://{os.getenv('PROXY_USERNAME')}:{os.getenv('PROXY_PASSWORD')}@p.webshare.io:80/"}
-        ])
+    # else:
+    transcript = YouTubeTranscriptApi.get_transcript(video_id, proxies={"https": f"https://oiholelg-rotate:h3zcpwb3wbr7@p.webshare.io:80/"})
 
-        write_content_to_file(
-            output_path='./transcripts',
-            content=transcript,
-            filename=f'{video_id}.json'
-        )
-        payload['transcript'] = transcript
-        return payload
+    write_content_to_file(
+        output_path='./transcripts',
+        content=transcript,
+        filename=f'{video_id}.json'
+    )
+    payload['transcript'] = transcript
+    return payload
 
 def convert_timestamped_transcript_to_text(timestamped_transcript: list[dict]) -> str:
     return ' '.join([item['text'] for item in timestamped_transcript])

@@ -7,6 +7,10 @@
   <body>
     <div class="container">
       <h1 class="title">AI翻譯俊銘小樹洞</h1>
+      <form action="/translate" method="get">
+        <input type="text" name="video-url" placeholder="Enter YouTube video URL" />
+        <button type="submit">Translate</button>
+      </form>
       {% if video_id %}
       <div id="video-container" class="video-container">
         <iframe

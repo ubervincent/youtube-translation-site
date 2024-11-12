@@ -1,0 +1,38 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 1.2rem;
+}
+
+.title {
+    font-size: 4rem;
+    margin: 2rem;
+    text-wrap: nowrap;
+}
+
+.translation {
+    display: block;
+    width: 100%;
+    font-size: 2rem;
+    margin: 2rem 0; 
+}
+
+p {
+    margin: 0.5rem 0;
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}

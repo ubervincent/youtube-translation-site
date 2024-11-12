@@ -11,7 +11,7 @@ logging.basicConfig(level=logging.INFO,
 
 logger = logging.getLogger(__name__)
 
-app = Flask(__name__, template_folder='site')
+app = Flask(__name__, template_folder='site/templates', static_folder='site/static')
 
 @app.route('/')
 def home():

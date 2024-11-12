@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+    <title>AI翻譯俊銘小樹林</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="title">AI翻譯俊銘小樹洞</h1>
+      {% if video_id %}
+      <div id="video-container" class="video-container">
+        <iframe
+          id="video-player"
+          src="{{ embed_url }}"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        >
+        </iframe>
+      </div>
+      {% endif %} {% if translated_transcript %}
+      <div id="translation" class="translation">
+        <p>{{ translated_transcript }}</p>
+      </div>
+      {% endif %}
+    </div>
+  </body>
+</html>

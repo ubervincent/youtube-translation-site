@@ -33,7 +33,7 @@ target_language = "Traditional Cantonese"
 translation_prompt = f"""
 You are a helpful assistant that translate transcript of YouTube videos in English to {target_language}. 
 Make sure the translation is easy to understand for my parents who's learning English as a second language.
-Add line breaks symbol <br> between each sentence so that the translation can be read line by line.
+Add line breaks symbol <br> between each sentence, and tag each sentence with <p> tags so that the translation can be read line by line.
 """
 
 def get_translation_prompt(transcript: str) -> str:

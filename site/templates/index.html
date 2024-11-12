@@ -7,7 +7,11 @@
   <body>
     <div class="container">
       <h1 class="title">YouTube Translator</h1>
-      <h2 class="subtitle">By Vincent Lam</h2>
+      <h1 class="title">By Vincent Lam</h1>
+      <form class="form" action="/translate" method="get">
+        <input type="text" name="video-url" placeholder="Enter YouTube video URL" />
+        <button type="submit">Translate</button>
+      </form>
       {% if video_id %}
       <div id="video-container" class="video-container">
         <iframe

@@ -2,6 +2,7 @@ from utils.utils import write_content_to_file, get_video_id_from_url, read_conte
 from youtube_transcript_api import YouTubeTranscriptApi
 from openai import OpenAI
 from dotenv import load_dotenv
+
 import os
 load_dotenv()
 
@@ -19,7 +20,9 @@ def get_transcript_by_url(url: str) -> str:
         return payload
     
     else:
-        transcript = YouTubeTranscriptApi.get_transcript(video_id)
+        transcript = YouTubeTranscriptApi.get_transcript(video_id, proxies=[
+            {"http": f"http://{os.getenv('PROXY_USERNAME')}:{os.getenv('PROXY_PASSWORD')}@p.webshare.io:80/"}
+        ])
 
         write_content_to_file(
             output_path='./transcripts',

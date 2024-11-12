@@ -7,26 +7,47 @@
     <h1>YouTube Translator</h1>
     <input type="text" id="video-url" placeholder="Enter YouTube video URL">
     <button id="translate-button">Translate</button>
-    <div id="transcript">
-        <p>Transcript will appear here</p>
+
+    <div id="video-container">
+        <iframe
+            id="video-player"
+            style="display: none;"
+            width="560"
+            height="315"
+            src=""
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+        </iframe>
+    </div>
+
+    <div id="translation">
+        <p>Translation will appear here</p>
     </div>
 </body>
 
 <script> 
-    function sendVideoUrl() {
+    async function sendVideoUrl() {
         const videoUrl = document.getElementById('video-url').value;
-        fetch('/translate', {
+
+        const transcriptResponse = await fetch('/translate', {
             method: 'POST',
             body: JSON.stringify({ url: videoUrl }),
             headers: {
                 'Content-Type': 'application/json'
             }
         })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            document.getElementById('transcript').innerHTML = JSON.stringify(data.transcript);
-        });
+
+        const transcriptData = await transcriptResponse.json();
+
+        document.getElementById('translation').innerHTML = transcriptData.transcript;
+        
+        const embedUrl = videoUrl.replace('watch?v=', 'embed/').split('&')[0];
+
+        document.getElementById('video-player').style.display = 'block';
+        document.getElementById('video-player').src = embedUrl;
+
     }
 
     document.getElementById('translate-button').addEventListener('click', sendVideoUrl);

@@ -1,56 +1,41 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>YouTube Translator</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>YouTube Translator</h1>
-    <input type="text" id="video-url" placeholder="Enter YouTube video URL">
-    <button id="translate-button">Translate</button>
+    <form action="/translate" method="get">
+      <input
+        type="text"
+        id="video-id"
+        name="video-url"
+        placeholder="Enter YouTube video URL"
+      />
+      <button id="translate-button">Translate</button>
+    </form>
 
+    {% if video_id %}
+    <div>{{ video_id }}</div>
     <div id="video-container">
-        <iframe
-            id="video-player"
-            style="display: none;"
-            width="560"
-            height="315"
-            src=""
-            title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen>
-        </iframe>
+      <iframe
+        id="video-player"
+        width="560"
+        height="315"
+        src="{{ embed_url }}"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+      >
+      </iframe>
     </div>
-
+    {% endif %} 
+    
+    {% if translated_transcript %}
     <div id="translation">
-        <p>Translation will appear here</p>
+      <p>{{ translated_transcript }}</p>
     </div>
-</body>
-
-<script> 
-    async function sendVideoUrl() {
-        const videoUrl = document.getElementById('video-url').value;
-        const embedUrl = videoUrl.replace('watch?v=', 'embed/').split('&')[0];
-
-        document.getElementById('video-player').style.display = 'block';
-        document.getElementById('video-player').src = embedUrl;
-
-        const transcriptResponse = await fetch('/translate', {
-            method: 'POST',
-            body: JSON.stringify({ url: videoUrl }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-
-        const transcriptData = await transcriptResponse.json();
-
-        document.getElementById('translation').innerHTML = transcriptData.transcript;
-        
-       
-
-    }
-
-    document.getElementById('translate-button').addEventListener('click', sendVideoUrl);
-</script>
+    {% endif %}
+  </body>
 </html>

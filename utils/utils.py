@@ -46,3 +46,9 @@ def write_content_to_file(
 def read_content_from_file(file_path: str) -> str:
     with open(file_path, 'r', encoding='utf-8') as f:
         return f.read()
+    
+def get_video_id_from_url(url: str) -> str:
+    return url.split('=')[1].split('&')[0]
+
+def get_embed_url_from_video_id(video_id: str) -> str:
+    return f"https://www.youtube.com/embed/{video_id}"

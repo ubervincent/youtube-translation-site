@@ -30,6 +30,10 @@
 <script> 
     async function sendVideoUrl() {
         const videoUrl = document.getElementById('video-url').value;
+        const embedUrl = videoUrl.replace('watch?v=', 'embed/').split('&')[0];
+
+        document.getElementById('video-player').style.display = 'block';
+        document.getElementById('video-player').src = embedUrl;
 
         const transcriptResponse = await fetch('/translate', {
             method: 'POST',
@@ -43,10 +47,7 @@
 
         document.getElementById('translation').innerHTML = transcriptData.transcript;
         
-        const embedUrl = videoUrl.replace('watch?v=', 'embed/').split('&')[0];
-
-        document.getElementById('video-player').style.display = 'block';
-        document.getElementById('video-player').src = embedUrl;
+       
 
     }
 

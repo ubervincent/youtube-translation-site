@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>YouTube Translator</title>
+</head>
+<body>
+    <h1>YouTube Translator</h1>
+    <input type="text" id="video-url" placeholder="Enter YouTube video URL">
+    <button id="translate-button">Translate</button>
+    <div id="transcript">
+        <p>Transcript will appear here</p>
+    </div>
+</body>
+
+<script> 
+    function sendVideoUrl() {
+        const videoUrl = document.getElementById('video-url').value;
+        fetch('/translate', {
+            method: 'POST',
+            body: JSON.stringify({ url: videoUrl }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            document.getElementById('transcript').innerHTML = JSON.stringify(data.transcript);
+        });
+    }
+
+    document.getElementById('translate-button').addEventListener('click', sendVideoUrl);
+</script>
+</html>

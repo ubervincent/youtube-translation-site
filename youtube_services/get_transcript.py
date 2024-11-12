@@ -36,13 +36,7 @@ Make sure the translation is easy to understand for my parents who's learning En
 Add line breaks symbol <br> between each sentence so that the translation can be read line by line.
 """
 
-def translate_text(transcript_data: dict) -> str:
-    transcript = convert_timestamped_transcript_to_text(transcript_data['transcript'])
-    
-    # check if the video has already been translated
-    if os.path.exists(f'./translations/{transcript_data["video_id"]}.txt'):
-        return read_content_from_file(f'./translations/{transcript_data["video_id"]}.txt')
-
+def get_translation_prompt(transcript: str) -> str:
     client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
     response = client.chat.completions.create(
         model="gpt-4o-mini",
@@ -51,11 +45,22 @@ def translate_text(transcript_data: dict) -> str:
             {"role": "user", "content": transcript}
         ],
     )
+
+    return response.choices[0].message.content
+
+def translate_text(transcript_data: dict) -> str:
+    transcript = convert_timestamped_transcript_to_text(transcript_data['transcript'])
+    
+    # check if the video has already been translated
+    if os.path.exists(f'./translations/{transcript_data["video_id"]}.txt'):
+        return read_content_from_file(f'./translations/{transcript_data["video_id"]}.txt')
+
+    translation = get_translation_prompt(transcript)
     
     write_content_to_file(
         output_path='./translations',
-        content=response.choices[0].message.content,
+        content=translation,
         filename=f'{transcript_data["video_id"]}.txt'
     )
     
-    return response.choices[0].message.content
+    return translation

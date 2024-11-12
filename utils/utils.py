@@ -48,7 +48,7 @@ def read_content_from_file(file_path: str) -> str:
         return f.read()
     
 def get_video_id_from_url(url: str) -> str:
-    return url.split('=')[1].split('&')[0]
+    return url.split('watch?v=')[1].split('&')[0]
 
 def get_embed_url_from_video_id(video_id: str) -> str:
     return f"https://www.youtube.com/embed/{video_id}"

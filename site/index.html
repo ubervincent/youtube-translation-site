@@ -5,7 +5,7 @@
   </head>
   <body>
     <h1>YouTube Translator</h1>
-    <form action="/translate" method="get">
+    <!-- <form action="/translate" method="get">
       <input
         type="text"
         id="video-id"
@@ -13,10 +13,9 @@
         placeholder="Enter YouTube video URL"
       />
       <button id="translate-button">Translate</button>
-    </form>
+    </form> -->
 
     {% if video_id %}
-    <div>{{ video_id }}</div>
     <div id="video-container">
       <iframe
         id="video-player"
